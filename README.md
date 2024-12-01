@@ -34,7 +34,7 @@ docker run --name fastapi-postgres -e POSTGRES_PASSWORD=비밀번호 -d -p 5432:
 ```
 - `--name fastapi-postgres`: 컨테이너의 이름을 fastapi-postgres로 지정
 - `-e POSTGRES_PASSWORD=비밀번호`: 환경변수 POSTGRES_PASSWORD를 설정하여 PostgreSQL의 비밀번호를 지정
-- `-d`: 백그라운드에서 컨테이너를 실행합니다 (Detached 모드).
+- `-d`: 백그라운드에서 컨테이너를 실행(Detached 모드)
 - `-p 5432:5432`: 호스트의 5432 포트를 컨테이너의 5432 포트와 매핑
 - `postgres:alpine`: 사용할 Docker 이미지는 postgres의 alpine 태그 버전
 
@@ -150,7 +150,9 @@ pip3 install "fastapi[all]" SQLAlchemy psycopg2-binary
 
 ## 3. Python project setup and connecting the database
 
-### 1) __init__.py 파일, database.py 파일 생성 후 database.py 파일에 다음 코드 작성
+### 1) __init__.py 파일, database.py 파일 생성
+
+### 2) database.py 파일에 다음 코드 작성
 
 <details>
 <summary> database.py </summary>
@@ -231,6 +233,75 @@ python 파일명.py
 ---
 
 ## 4. Model Creation
+
+### 1) models.py 작성
+
+<details>
+<summary>models.py</summary>
+
+```
+import datetime as _dt
+import sqlalchemy as _sql
+import database as _database
+
+class Contact(_database.Base):
+    __tablename__ = "contacts"
+    id = _sql.Column(_sql.Integer, primary_key=True, index=True)
+    first_name = _sql.Column(_sql.String, index=True)
+    last_name = _sql.Column(_sql.String, index=True)
+    email = _sql.Column(_sql.String, index=True, unique=True)
+    phone_number = _sql.Column(_sql.String, index=True, unique=True)
+    date_created = _sql.Column(_sql.DateTime, default=_dt.datetime.now)
+```
+
+</details>
+
+### 2) services.py 작성
+
+<details>
+<summary>services.py</summary>
+
+```
+import database as _database
+import models as _models
+
+def _add_tables():
+    return _database.Base.metadata.create_all(bind=_database.engine)
+```
+
+</details>
+
+### 3) 파이썬 스크립트에서 테이블 생성 함수 호출 
+
+![image](https://github.com/user-attachments/assets/af8b8c50-45d6-4c24-99f4-b083e50a3000)
+
+ - 테이블을 DB에 생성하는 함수 호출 방법
+    - Python 인터프리터에서 직접 실행
+    - Python 스크립트에서 호출
+- 여기서는 스크립트에서 호출을 함.
+
+### 4) PostgreSQL 컨테이너에서 확인
+
+- `\dt` : 테이블 목록 확인
+![image](https://github.com/user-attachments/assets/75b5ce77-dd9c-4a90-8b10-ccd0bbe02688)
+
+- contacts 테이블의 모든 row 조회
+![image](https://github.com/user-attachments/assets/adbc7cb7-9ff9-43a5-bbca-9eb5ffd849f5)
+
+<details>
+<summary>도커 컨테이너 접속</summary>
+
+### 도커 컨테이너 내의 PostgreSQL에 접속
+```
+docker exec -it fastapi-postgres psql -U postgres
+```
+
+### PostgreSQL에서 데이터베이스 선택
+```
+\c fastapi_database
+```
+
+</details>
 
 ---
 
