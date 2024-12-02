@@ -12,7 +12,6 @@ class Contact(_BaseContact):
     date_created: _dt.datetime
     
     class Config:
-        orm_mode = True
         from_attributes = True
 
 class CreateContact(_BaseContact):

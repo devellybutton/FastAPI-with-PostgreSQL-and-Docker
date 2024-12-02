@@ -1,11 +1,53 @@
 # FastAPI with PostgreSQL and Docker
 
+> - 0. [Demonstration](https://github.com/devellybutton/FastAPI-with-PostgreSQL-and-Docker?tab=readme-ov-file#0-Demonstration)
 > - 1. [Creating the PostgreSQL Docker Container](https://github.com/devellybutton/FastAPI-with-PostgreSQL-and-Docker?tab=readme-ov-file#1-creating-the-postgresql-docker-container)
 > - 2. [Creating the Database](https://github.com/devellybutton/FastAPI-with-PostgreSQL-and-Docker?tab=readme-ov-file#2-creating-the-postgresql-docker-container)
 > - 3. [Python project setup and connecting the database](https://github.com/devellybutton/FastAPI-with-PostgreSQL-and-Docker?tab=readme-ov-file#3-python-project-setup-and-connecting-the-database)
 > - 4. [Model Creation](https://github.com/devellybutton/FastAPI-with-PostgreSQL-and-Docker?tab=readme-ov-file#4-model-creation)
 > - 5. [Schema Creation](https://github.com/devellybutton/FastAPI-with-PostgreSQL-and-Docker?tab=readme-ov-file#5-schema-creation)
 > - 6. [Building the API](https://github.com/devellybutton/FastAPI-with-PostgreSQL-and-Docker?tab=readme-ov-file#6-building-the-api)
+
+---
+
+## 0. Demonstration
+
+<details>
+<summary>GET /api/contacts/ - Get Contacts</summary>
+
+![getAll](https://github.com/user-attachments/assets/5e0f1634-7459-487d-85fc-c9cc9c100b7a)
+
+</details>
+<details>
+<summary>POST /api/contacts/ - Create Contact</summary>
+
+![post](https://github.com/user-attachments/assets/b264c9e2-a387-4cb5-87f9-8ff3944a86d8)
+
+</details>
+<details>
+<summary>GET /api/contacts/{contact_id} - Get Contact</summary>
+
+![get1개](https://github.com/user-attachments/assets/8c932c55-881a-48e1-a7e5-0ac585216616)
+
+</details>
+<details>
+<summary>DELETE /api/contacts/{contact_id} - Delete Contact</summary>
+
+![delete](https://github.com/user-attachments/assets/4d03f3aa-24f0-4890-9341-53cec60148dd)
+
+</details>
+<details>
+<summary>PUT /api/contacts/{contact_id} - Update Contact</summary>
+
+![put](https://github.com/user-attachments/assets/d1feb518-d91f-4972-99b3-49430987899f)
+
+</details>
+<details>
+<summary>컨테이너 내부 데이터 조회</summary>
+
+![컨테이너내부](https://github.com/user-attachments/assets/9339561a-ba16-45eb-8566-e7445fce1acf)
+</details>
+
 
 ---
 
@@ -322,6 +364,10 @@ docker exec -it fastapi-postgres psql -U postgres
 
 ![image](https://github.com/user-attachments/assets/53b51780-3789-4267-bcb8-a836fb10cfdf)
 
+- `orm_mode` => `from_attribute`
+- `from_orm` => `model_validate`
+
+<br>
 
 - `from_orm()` : ORM 객체를 Pydantic 모델로 변환
 - from_orm은 <b>deprecated</b>됨. <br>
