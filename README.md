@@ -271,7 +271,11 @@ def _add_tables():
 
 </details>
 
-### 3) 파이썬 스크립트에서 테이블 생성 함수 호출 
+-----
+
+## 5. Schema Creation
+
+### 1) 파이썬 스크립트에서 테이블 생성 함수 호출 
 
 ![image](https://github.com/user-attachments/assets/af8b8c50-45d6-4c24-99f4-b083e50a3000)
 
@@ -280,7 +284,7 @@ def _add_tables():
     - Python 스크립트에서 호출
 - 여기서는 스크립트에서 호출을 함.
 
-### 4) PostgreSQL 컨테이너에서 확인
+### 2) PostgreSQL 컨테이너에서 확인
 
 - `\dt` : 테이블 목록 확인
 ![image](https://github.com/user-attachments/assets/75b5ce77-dd9c-4a90-8b10-ccd0bbe02688)
@@ -303,13 +307,42 @@ docker exec -it fastapi-postgres psql -U postgres
 
 </details>
 
----
+- SQLAlchemy : ORM (sequelize)
+- Pydantic : 데이터 검증 (joi, zod)
 
-## 5. Schema Creation
+- `schemas.py` : Pydantic으로 데이터 검증과 형식 지정
+- `services.py` : 실제 DB와 상호작용하는 비즈니스 로직
+- `models.py` : SQLAlchemy 모델 정의, 실제 DB 테이블 모델임.
 
 ---
 
 ## 6. Building the API
+
+![image](https://github.com/user-attachments/assets/22c2fc96-2aeb-439b-a485-65e4da85e75a)
+
+![image](https://github.com/user-attachments/assets/53b51780-3789-4267-bcb8-a836fb10cfdf)
+
+
+- `from_orm()` : ORM 객체를 Pydantic 모델로 변환
+
+<details>
+<summary>참고) uvicorn 실행 스크립트 작성하기</summary>
+
+- start_uvicorn.ps1
+    ```
+    # 프로젝트 경로로 이동
+    Set-Location -Path "C:\Users\airyt\FastAPI-with-PostgreSQL-and-Docker"
+
+    # 가상 환경 활성화
+    .\venv\Scripts\Activate.ps1
+
+    # uvicorn 실행
+    uvicorn main:app --reload
+    ```
+
+- 작성 후 파워셀 터미널에서 `.\start_uvicorn.ps1` 입력
+
+</details>
 
 ---
 
