@@ -324,6 +324,9 @@ docker exec -it fastapi-postgres psql -U postgres
 
 
 - `from_orm()` : ORM 객체를 Pydantic 모델로 변환
+- from_orm은 <b>deprecated</b>됨. <br>
+=> `model_validate` 로 ORM 객체를 받아와서 Pydantic 모델로 변환해야됨. <br>
+(`from_attributes = True` 옵션 추가해야 에러가 안 남)
 
 <details>
 <summary>참고) uvicorn 실행 스크립트 작성하기</summary>

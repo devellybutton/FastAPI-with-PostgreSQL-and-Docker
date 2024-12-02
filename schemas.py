@@ -13,6 +13,7 @@ class Contact(_BaseContact):
     
     class Config:
         orm_mode = True
+        from_attributes = True
 
 class CreateContact(_BaseContact):
     pass
